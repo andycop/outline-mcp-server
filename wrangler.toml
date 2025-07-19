@@ -1,0 +1,70 @@
+# Cloudflare Wrangler configuration for Outline MCP Server
+name = "outline-mcp-server"
+main = "build/worker/worker.js"
+compatibility_date = "2024-07-15"
+node_compat = true
+
+# Worker configuration
+[env.production]
+name = "outline-mcp-server"
+
+[env.staging]
+name = "outline-mcp-server-staging"
+
+# Environment variables that need to be set in Cloudflare dashboard
+# or via wrangler secret put commands
+[vars]
+OUTLINE_MCP_HOST = "0.0.0.0"
+OUTLINE_MCP_PORT = "8080"
+
+# Secrets (set these using: wrangler secret put OUTLINE_API_KEY)
+# Required secrets:
+# - OUTLINE_API_KEY: Your Outline API key
+# - OUTLINE_API_URL: Your Outline API URL (e.g., https://app.getoutline.com/api)
+
+# Build configuration
+[build]
+command = "npm run build:worker"
+
+# Assets configuration for static files
+[[rules]]
+type = "ESModule"
+globs = ["**/*.js"]
+fallthrough = true
+
+# Durable Objects (if needed for session management in the future)
+# [durable_objects]
+# bindings = [
+#   { name = "MCP_SESSIONS", class_name = "McpSession" }
+# ]
+
+# KV namespaces (if needed for caching)
+# [[kv_namespaces]]
+# binding = "MCP_CACHE"
+# id = "your-kv-namespace-id"
+# preview_id = "your-preview-kv-namespace-id"
+
+# Routes configuration
+# Uncomment and modify these if you want to use custom domains
+# [env.production]
+# routes = [
+#   { pattern = "mcp.yourdomain.com/*", zone_name = "yourdomain.com" }
+# ]
+
+# [env.staging]
+# routes = [
+#   { pattern = "mcp-staging.yourdomain.com/*", zone_name = "yourdomain.com" }
+# ]
+
+# Limits and resource allocation
+[limits]
+cpu_ms = 30000
+
+# Analytics and observability
+[observability]
+enabled = true
+
+# Triggers (for scheduled tasks if needed)
+# [[triggers.crons]]
+# cron = "0 0 * * *"
+# globs = ["src/scheduled/*.js"]

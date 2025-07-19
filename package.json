@@ -20,14 +20,18 @@
   },
   "scripts": {
     "build": "tsc && chmod +x build/index.js && chmod +x build/stdio.js",
+    "build:worker": "tsc -p tsconfig.worker.json",
     "build:dxt": "./scripts/build-dxt.sh",
     "prepare": "npm run build",
     "watch": "bun --watch src/index.ts",
     "watch:stdio": "bun --watch src/stdio.ts",
     "dev": "concurrently -n 'build,inspector' -c 'blue.bold,green.bold' 'npm run watch' 'npm run inspector'",
+    "dev:worker": "wrangler dev",
     "run-dxt": "dotenv bun src/dxt.ts",
     "inspector": "npx @modelcontextprotocol/inspector@latest",
     "start": "bun build/index.js",
+    "deploy": "npm run build:worker && wrangler deploy",
+    "deploy:staging": "npm run build:worker && wrangler deploy --env staging",
     "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx,json}\"",
     "semantic-release": "semantic-release"
   },
@@ -40,6 +44,7 @@
     "zod": "3.25.67"
   },
   "devDependencies": {
+    "@cloudflare/workers-types": "^4.20241218.0",
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
     "@types/node": "20.19.1",
@@ -48,7 +53,8 @@
     "dotenv-cli": "^8.0.0",
     "prettier": "3.6.0",
     "semantic-release": "^22.0.12",
-    "typescript": "5.x"
+    "typescript": "5.x",
+    "wrangler": "^3.80.0"
   },
   "keywords": [
     "outline",

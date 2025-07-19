@@ -1,0 +1,16 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "lib": ["ES2022", "WebWorker"],
+    "types": ["@cloudflare/workers-types"],
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": false,
+    "noEmit": false,
+    "outDir": "build/worker",
+    "skipLibCheck": true
+  },
+  "include": ["src/worker.ts", "src/utils/**/*", "src/outline/**/*", "src/tools/**/*"],
+  "exclude": ["src/index.ts", "src/stdio.ts", "src/dxt.ts"]
+}

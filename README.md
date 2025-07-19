@@ -18,6 +18,24 @@ One click install in Cursor:
 
 [![Install MCP Server](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/install-mcp?name=outline&config=eyJjb21tYW5kIjoibnB4IC15IC0tcGFja2FnZT1vdXRsaW5lLW1jcC1zZXJ2ZXJAbGF0ZXN0IC1jIG91dGxpbmUtbWNwLXNlcnZlci1zdGRpbyIsImVudiI6eyJPVVRMSU5FX0FQSV9LRVkiOiI8UkVQTEFDRV9NRT4iLCJPVVRMSU5FX0FQSV9VUkwiOiJodHRwczovL2FwcC5nZXRvdXRsaW5lLmNvbS9hcGkifX0%3D)
 
+### Cloudflare Workers (Serverless)
+
+For production deployments, you can deploy this MCP server to Cloudflare Workers for global, serverless hosting:
+
+```bash
+# Install dependencies
+npm install
+
+# Set up secrets
+wrangler secret put OUTLINE_API_KEY
+wrangler secret put OUTLINE_API_URL
+
+# Deploy to production
+npm run deploy
+```
+
+See [CLOUDFLARE_DEPLOYMENT.md](./CLOUDFLARE_DEPLOYMENT.md) for detailed deployment instructions.
+
 ## Features
 
 - **Document Management**
