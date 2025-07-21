@@ -1,8 +1,8 @@
 # Cloudflare Wrangler configuration for Outline MCP Server
 name = "outline-mcp-server"
 main = "build/worker/worker.js"
-compatibility_date = "2024-07-15"
-node_compat = true
+compatibility_date = "2024-09-23"
+compatibility_flags = ["nodejs_compat"]
 
 # Worker configuration
 [env.production]
@@ -24,7 +24,7 @@ OUTLINE_MCP_PORT = "8080"
 
 # Build configuration
 [build]
-command = "npm run build"
+command = "npm run build:worker"
 
 # Assets configuration for static files
 [[rules]]

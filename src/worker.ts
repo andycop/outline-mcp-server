@@ -5,7 +5,7 @@
 
 import { McpAgent } from 'agents/mcp';
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
-import { loadAllTools } from './utils/loadAllTools.js';
+import { loadAllTools } from './utils/loadAllToolsWorker.js';
 import { RequestContext } from './utils/toolRegistry.js';
 
 // Define types for Cloudflare Workers environment
