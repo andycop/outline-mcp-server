@@ -122,14 +122,28 @@ export default {
 
     // Handle MCP endpoint using the Agents SDK
     if (url.pathname === '/mcp') {
-      const mcpHandler = OutlineMCP.serve('/mcp', {
-        corsOptions: {
-          origin: '*',
-          methods: 'POST, OPTIONS',
-          headers: 'Content-Type, x-outline-api-key, outline-api-key, authorization',
-        }
-      });
-      return await mcpHandler.fetch(request, env, ctx);
+      try {
+        // Set up request context with environment
+        setupRequestContext(request, env);
+        
+        const agent = new OutlineMCP();
+        // Pass the env to the agent instance
+        (agent as any).env = env;
+        
+        return await agent.fetch(request);
+      } catch (error: any) {
+        console.error('Error handling MCP request:', error);
+        return new Response(JSON.stringify({ error: error.message }), {
+          status: 500,
+          headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+          },
+        });
+      } finally {
+        // Clean up context
+        RequestContext.resetInstance();
+      }
     }
 
     // Handle health check
