@@ -1,5 +1,4 @@
 {
-  "extends": "./tsconfig.json",
   "compilerOptions": {
     "target": "ES2022",
     "module": "ESNext",
@@ -9,7 +8,11 @@
     "allowImportingTsExtensions": false,
     "noEmit": false,
     "outDir": "build/worker",
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "strict": false,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true
   },
   "include": ["src/worker.ts", "src/utils/**/*", "src/outline/**/*", "src/tools/**/*"],
   "exclude": ["src/index.ts", "src/stdio.ts", "src/dxt.ts"]

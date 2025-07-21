@@ -24,7 +24,7 @@ OUTLINE_MCP_PORT = "8080"
 
 # Build configuration
 [build]
-command = "npm run build:worker"
+command = "npm run build"
 
 # Assets configuration for static files
 [[rules]]
