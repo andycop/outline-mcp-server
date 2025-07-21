@@ -57,8 +57,9 @@ fallthrough = true
 # ]
 
 # Limits and resource allocation
-[limits]
-cpu_ms = 30000
+# Note: CPU limits require a paid Cloudflare Workers plan
+# [limits]
+# cpu_ms = 30000
 
 # Analytics and observability
 [observability]
