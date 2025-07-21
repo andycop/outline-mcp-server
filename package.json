@@ -20,7 +20,7 @@
   },
   "scripts": {
     "build": "tsc && chmod +x build/index.js && chmod +x build/stdio.js",
-    "build:worker": "tsc -p tsconfig.worker.json",
+    "build:worker": "bash ./scripts/build-worker.sh",
     "build:dxt": "./scripts/build-dxt.sh",
     "prepare": "npm run build",
     "watch": "bun --watch src/index.ts",
@@ -55,7 +55,7 @@
     "prettier": "3.6.0",
     "semantic-release": "^22.0.12",
     "typescript": "5.x",
-    "wrangler": "^3.80.0"
+    "wrangler": "4.25.0"
   },
   "keywords": [
     "outline",

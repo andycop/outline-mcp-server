@@ -12,8 +12,12 @@
     "strict": false,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "paths": {
+      "./outline/outlineClient.js": ["./outline/outlineClientWorker.js"],
+      "../outline/outlineClient.js": ["../outline/outlineClientWorker.js"]
+    }
   },
   "include": ["src/worker.ts", "src/utils/**/*", "src/outline/**/*", "src/tools/**/*"],
-  "exclude": ["src/index.ts", "src/stdio.ts", "src/dxt.ts"]
+  "exclude": ["src/index.ts", "src/stdio.ts", "src/dxt.ts", "src/utils/loadAllTools.ts", "src/outline/outlineClient.ts"]
 }

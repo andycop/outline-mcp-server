@@ -29,6 +29,10 @@ function extractApiKey(request: Request): string | undefined {
  * Sets up request context with API key
  */
 function setupRequestContext(request: Request, env: Env): void {
+  // Set global environment variables from Cloudflare env binding
+  (globalThis as any).OUTLINE_API_KEY = env.OUTLINE_API_KEY;
+  (globalThis as any).OUTLINE_API_URL = env.OUTLINE_API_URL;
+
   const apiKey = extractApiKey(request);
   const envApiKey = env.OUTLINE_API_KEY;
 
