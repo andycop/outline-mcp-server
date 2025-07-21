@@ -37,6 +37,7 @@
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "1.13.1",
+    "agents": "^0.0.109",
     "axios": "1.10.0",
     "dotenv": "16.5.0",
     "fastify": "5.4.0",
