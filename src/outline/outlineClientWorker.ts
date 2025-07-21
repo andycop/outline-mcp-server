@@ -9,14 +9,14 @@ const API_URL = 'https://app.getoutline.com/api';
  * Creates an Outline API client with the specified API key
  */
 export function createOutlineClient(apiKey?: string): AxiosInstance {
-  const key = apiKey || globalThis.OUTLINE_API_KEY;
+  const key = apiKey || (globalThis as any).OUTLINE_API_KEY;
 
   if (!key) {
     throw new Error('OUTLINE_API_KEY must be provided either as parameter or environment variable');
   }
 
   return axios.create({
-    baseURL: globalThis.OUTLINE_API_URL || API_URL,
+    baseURL: (globalThis as any).OUTLINE_API_URL || API_URL,
     headers: {
       Authorization: `Bearer ${key}`,
       'Content-Type': 'application/json',
