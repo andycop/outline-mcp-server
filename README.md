@@ -1,4 +1,4 @@
-# Outline MCP Server
+# Outline MCP Server (tweaked)
 
 ![npm](https://img.shields.io/npm/v/outline-mcp-server) • ![downloads](https://img.shields.io/npm/dy/outline-mcp-server)
 
