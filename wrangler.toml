@@ -7,15 +7,18 @@ compatibility_flags = ["nodejs_compat"]
 # Worker configuration
 [env.production]
 name = "outline-mcp-server"
+[env.production.vars]
+OUTLINE_MCP_HOST = "0.0.0.0"
+OUTLINE_MCP_PORT = "8080"
 
 [env.staging]
 name = "outline-mcp-server-staging"
+[env.staging.vars]
+OUTLINE_MCP_HOST = "0.0.0.0"
+OUTLINE_MCP_PORT = "8080"
 
 # Environment variables that need to be set in Cloudflare dashboard
 # or via wrangler secret put commands
-[vars]
-OUTLINE_MCP_HOST = "0.0.0.0"
-OUTLINE_MCP_PORT = "8080"
 
 # Secrets (set these using: wrangler secret put OUTLINE_API_KEY)
 # Required secrets:
