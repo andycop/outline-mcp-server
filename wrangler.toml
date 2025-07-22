@@ -46,7 +46,7 @@ fallthrough = true
 # Durable Objects migrations
 [[migrations]]
 tag = "v1"
-new_classes = ["OutlineMCP"]
+new_sqlite_classes = ["OutlineMCP"]
 
 # KV namespaces (if needed for caching)
 # [[kv_namespaces]]
