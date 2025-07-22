@@ -35,11 +35,11 @@ type = "ESModule"
 globs = ["**/*.js"]
 fallthrough = true
 
-# Durable Objects (if needed for session management in the future)
-# [durable_objects]
-# bindings = [
-#   { name = "MCP_SESSIONS", class_name = "McpSession" }
-# ]
+# Durable Objects binding required by agents library
+[durable_objects]
+bindings = [
+  { name = "MCP_OBJECT", class_name = "OutlineMCP" }
+]
 
 # KV namespaces (if needed for caching)
 # [[kv_namespaces]]

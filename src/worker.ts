@@ -54,6 +54,7 @@ function setupRequestContext(request: Request, env: Env): void {
 
 /**
  * Outline MCP Agent implementation using Cloudflare Agents SDK
+ * Exported as a Durable Object for Cloudflare Workers
  */
 export class OutlineMCP extends McpAgent<Env> {
   server = (async () => {
