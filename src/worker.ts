@@ -122,28 +122,7 @@ export default {
 
     // Handle MCP endpoint using the Agents SDK
     if (url.pathname === '/mcp') {
-      try {
-        // Set up request context with environment
-        setupRequestContext(request, env);
-        
-        const agent = new OutlineMCP();
-        // Pass the env to the agent instance
-        (agent as any).env = env;
-        
-        return await agent.fetch(request);
-      } catch (error: any) {
-        console.error('Error handling MCP request:', error);
-        return new Response(JSON.stringify({ error: error.message }), {
-          status: 500,
-          headers: {
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*',
-          },
-        });
-      } finally {
-        // Clean up context
-        RequestContext.resetInstance();
-      }
+      return OutlineMCP.serve('/mcp').fetch(request, env, ctx);
     }
 
     // Handle health check
