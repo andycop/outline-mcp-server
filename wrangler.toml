@@ -4,6 +4,11 @@ main = "build/worker/worker.js"
 compatibility_date = "2024-09-23"
 compatibility_flags = ["nodejs_compat"]
 
+# Durable Objects bindings for default environment
+[[durable_objects.bindings]]
+name = "MCP_OBJECT"
+class_name = "OutlineMCP"
+
 # Worker configuration
 [env.production]
 name = "outline-mcp-server"
