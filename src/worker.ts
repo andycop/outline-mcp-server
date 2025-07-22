@@ -172,3 +172,6 @@ export default {
     });
   },
 };
+
+// Export the Durable Object class for Cloudflare Workers
+export { OutlineMCP };
