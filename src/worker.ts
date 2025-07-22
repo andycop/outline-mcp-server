@@ -3,7 +3,8 @@
  * This file adapts the existing MCP server to work with Cloudflare Workers using the Cloudflare Agents SDK
  */
 
-import { McpAgent, McpServer } from 'agents/mcp';
+import { McpAgent } from 'agents/mcp';
+import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { loadAllTools } from './utils/loadAllToolsWorker.js';
 import { RequestContext } from './utils/toolRegistry.js';
 
