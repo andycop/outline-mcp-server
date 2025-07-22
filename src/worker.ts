@@ -57,16 +57,16 @@ function setupRequestContext(request: Request, env: Env): void {
  * Exported as a Durable Object for Cloudflare Workers
  */
 export class OutlineMCP extends McpAgent<Env> {
-  server = (async () => {
-    const mcpServer = new McpServer({
-      name: process.env.npm_package_name || 'outline-mcp-server',
-      version: process.env.npm_package_version || 'unknown',
-      description: 'Outline Model Context Protocol server',
-    });
+  server = new McpServer({
+    name: 'outline-mcp-server',
+    version: '5.5.0',
+    description: 'Outline Model Context Protocol server',
+  });
 
+  async init() {
     // Load and register all tools
     await loadAllTools(tool =>
-      mcpServer.registerTool(
+      this.server.registerTool(
         tool.name,
         {
           description: tool.description,
@@ -76,15 +76,6 @@ export class OutlineMCP extends McpAgent<Env> {
         tool.callback
       )
     );
-
-    // Type cast to resolve version mismatch between SDK versions
-    return mcpServer as any;
-  })();
-
-  async init() {
-    // Server initialization is handled in the server property
-    // Set up request context based on the current request
-    // Note: This will need to be handled per-request
   }
 
   async fetch(request: Request): Promise<Response> {
@@ -103,29 +94,19 @@ export class OutlineMCP extends McpAgent<Env> {
   }
 }
 
+// Create the MCP handler
+const mcpHandler = OutlineMCP.serve("/mcp", {
+  binding: "MCP_OBJECT"
+});
+
 /**
  * Main Cloudflare Workers fetch handler
+ * Handles health checks and routes MCP requests to the agent
  */
 export default {
   async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
     const url = new URL(request.url);
     
-    // Handle CORS preflight requests
-    if (request.method === 'OPTIONS') {
-      return new Response(null, {
-        headers: {
-          'Access-Control-Allow-Origin': '*',
-          'Access-Control-Allow-Methods': 'POST, OPTIONS',
-          'Access-Control-Allow-Headers': 'Content-Type, x-outline-api-key, outline-api-key, authorization',
-        },
-      });
-    }
-
-    // Handle MCP endpoint using the Agents SDK
-    if (url.pathname === '/mcp') {
-      return OutlineMCP.serve('/mcp').fetch(request, env, ctx);
-    }
-
     // Handle health check
     if (url.pathname === '/health') {
       return new Response(
@@ -163,12 +144,7 @@ export default {
       );
     }
 
-    // Default 404 response
-    return new Response('Not Found', { 
-      status: 404,
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-      },
-    });
+    // Delegate all other requests to the MCP handler
+    return mcpHandler.fetch(request, env, ctx);
   },
 };
