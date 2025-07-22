@@ -11,11 +11,19 @@ name = "outline-mcp-server"
 OUTLINE_MCP_HOST = "0.0.0.0"
 OUTLINE_MCP_PORT = "8080"
 
+[[env.production.durable_objects.bindings]]
+name = "MCP_OBJECT"
+class_name = "OutlineMCP"
+
 [env.staging]
 name = "outline-mcp-server-staging"
 [env.staging.vars]
 OUTLINE_MCP_HOST = "0.0.0.0"
 OUTLINE_MCP_PORT = "8080"
+
+[[env.staging.durable_objects.bindings]]
+name = "MCP_OBJECT"
+class_name = "OutlineMCP"
 
 # Environment variables that need to be set in Cloudflare dashboard
 # or via wrangler secret put commands
@@ -35,11 +43,10 @@ type = "ESModule"
 globs = ["**/*.js"]
 fallthrough = true
 
-# Durable Objects binding required by agents library
-[durable_objects]
-bindings = [
-  { name = "MCP_OBJECT", class_name = "OutlineMCP" }
-]
+# Durable Objects migrations
+[[migrations]]
+tag = "v1"
+new_classes = ["OutlineMCP"]
 
 # KV namespaces (if needed for caching)
 # [[kv_namespaces]]
